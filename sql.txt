@@ -1,0 +1,44 @@
+
+/* Query 1 - query used for first insight */
+
+SELECT strftime('%Y', i.InvoiceDate) YEAR,
+                                     avg(UnitPrice * Quantity) Average_sales
+FROM Invoice i
+JOIN InvoiceLine l ON i.InvoiceId = l.InvoiceId
+GROUP BY 1
+ORDER BY 1;
+
+
+/* Query 2 - query used for second insight */
+
+SELECT g.Name Genre,
+       sum(l.UnitPrice * Quantity) sales
+FROM InvoiceLine l
+JOIN Track t ON l.TrackId = t.TrackId
+JOIN Genre g ON t.GenreId = g.GenreId
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 10;
+
+/* Query 3 - query used for third insight */
+
+SELECT m.Name,
+       count(*) cnt
+FROM InvoiceLine l
+JOIN Track t ON l.TrackId = t.TrackId
+JOIN MediaType m ON t.MediaTypeId = m.MediaTypeId
+GROUP BY 1
+ORDER BY 2 DESC;
+
+
+/* Query 4 - query used for forth insight */
+
+SELECT a.Title Album,
+       sum(l.Quantity) orders
+FROM Album a
+JOIN Track t ON a.AlbumId = t.AlbumId
+JOIN InvoiceLine l ON t.TrackId = l.TrackId
+JOIN Invoice i ON i.InvoiceId = l.InvoiceId
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 10;
