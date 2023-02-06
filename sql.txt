@@ -1,3 +1,5 @@
+/*In this project, you will query the Parch and Posey Database. The Parch and Posey Database holds information about a paper store*/
+
 
 /* Query 1 - query used for first insight */
 
